@@ -76,6 +76,9 @@ html,body{
     right: 0;
     background: url('../img/arrow-circle-right-svgrepo-com.svg') 0 0 / 100% no-repeat; /* Стрелка вправо */
 }
+.slider .slick-arrow.slick-disabled{
+    opacity: 0.2; /* Отключение кнопки, если уже не куда листать (нет изображений) */
+}
 
 /* Точки */
 .slider .slick-dots{

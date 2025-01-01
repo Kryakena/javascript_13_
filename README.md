@@ -95,19 +95,19 @@ $(document).ready(function () {
 ```html
 <div class="slider">
    <div class="slider_item">
-      <img src="img/1.jpg" alt="">
+      <img src="img/slides/1.jpg" alt="">
    </div>
    <div class="slider_item">
-      <img src="img/2.jpg" alt="">
+      <img src="img/slides/2.jpg" alt="">
    </div>
    <div class="slider_item">
-      <img src="img/3.jpg" alt="">
+      <img src="img/slides/3.jpg" alt="">
    </div>
    <div class="slider_item">
-      <img src="img/4.jpg" alt="">
+      <img src="img/slides/4.jpg" alt="">
    </div>
    <div class="slider_item">
-      <img src="img/5.jpg" alt="">
+      <img src="img/slides/5.jpg" alt="">
    </div>
 </div>
 ```
@@ -175,8 +175,75 @@ $(document).ready(function () {
 }
 ```
 
-13. в файле style.css 
+13. скачиваем изображения стрелок "Вперед" и "Назад" в формате svg (https://www.svgrepo.com/vectors/arrow/glyph/)
+    Загружаем их в папку img
+
+14. в файле style.css стилизуем стрелочки слайдера
 
 ```css
-
+.slider {
+   position: relative;
+   padding: 0 60px;
+}
+.slider .slick-arrow { /* Собираем стрелки слайдера вместе */
+   position: absolute;
+   top: 50%;
+   margin: -30px 0 0 0;
+   z-index: 10;
+   font-size: 0; /* Убрать надписи на кнопках, вместо них сделаем изображения */
+   width: 30px;
+   height: 60px;
+}
+.slider .slick-arrow.slick-prev { /* Стрелка слайдера слева */
+   left: 0;
+   background: url('../img/arrow-circle-left-svgrepo-com.svg') 0 0 / 100% no-repeat; /* Стрелка влево */
+}
+.slider .slick-arrow.slick-next { /* Стрелка слайдера справа */
+   right: 0;
+   background: url('../img/arrow-circle-right-svgrepo-com.svg') 0 0 / 100% no-repeat; /* Стрелка вправо */
+}
 ```
+
+15. в файле style.css стилизуем точки поиска фотографий для нашего слайдера
+
+```css
+/* Точки */
+.slider .slick-dots{
+   display: flex;
+   align-items: center; /* Поставим точки в центре по горизонтали */
+   justify-content: center; /* Поставим точки в центре по вертикали */
+}
+.slider .slick-dots li{
+   list-style: none; /* Точки упорядочиваем по порядку в строку */
+   margin: 0 10px; /* Расстояние (отступы) между точками */
+}
+.slider .slick-dots button{
+   font-size: 0; /* Прячем нумерацию */
+   width: 10px;
+   height: 10px;
+   background-color: #fff; /* Появляется белая полоска вместо всех точек */
+   border-radius: 50%; /* Белая полоска разделяется на точки */
+}
+```
+
+16. в файле style.css чтобы точка с выбранным изображением выделилась цветом
+
+```css
+.slider .slick-dots li.slick-active button{ /* Активная точка с выбранным изображением */
+   background-color: transparent; /* Выбранная точка прозрачная */
+   border: 1px solid #fff;
+}
+```
+
+17. адаптивный слайдер по высоте изображений 
+
+в файле script.js
+```js
+adaptiveHeight: true, // Автоматическая адаптивная высота слайда, по умолчанию эта функция выключена - false
+```
+в файле style.css в .slick-track добавляем
+```css
+align-items: flex-start; /* Прижмет наш слайд кверху, тогда adaptiveHeight в script.js будет работать */
+```
+
+18. 

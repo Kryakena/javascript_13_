@@ -257,7 +257,7 @@ slidesToShow: 3, // Какое количество слайдов мы хоти
 Уменьшится количество точек внизу слайдера
 
 ```js
-slidesToScroll: 3, // Количество слайдов, которое будет пролистываться за 1 нажатие стрелки, либо кнопки. 
+slidesToScroll: 1, // Количество слайдов, которое будет пролистываться за 1 нажатие стрелки, либо кнопки. 
 // По умолчанию 1.
 ```
 
@@ -311,7 +311,7 @@ pauseOnDotsHover: true, // DotsHover - пауза при наведении на
 
 ```js
 // Свайп (перетаскивание) изображений
-draggable: true, // На компьютере отвечает за свайп. По умолчанию true
+draggable: false, // На компьютере отвечает за свайп. По умолчанию true
 swipe: true, // На мобильном устройстве отвечает за свайп. По умолчанию true
     
 touchThreshold: 10, // Сколько изображений можно свайпить за 1 раз. По умолчанию 1
@@ -333,4 +333,106 @@ text-align: center; /* Настраиваем по центру выбранно
 .slider_item.slick-center {
 opacity: 1; /* Непрозрачность изображений вернуть для центрального слайда */
 }
+```
+
+29. в файле script.js настраиваем ширину слайдов
+
+```css
+variableWidth: false, // Ширина слайдов согласно содержимому картинки. По умолчанию true
+```
+
+30. в файле script.js и style.css настраиваем столбцы и строки с изображениями
+
+script.js
+```js
+vertical:false, // Вертикальное изображение слайдера + добавляем в css .slider_item (height: 225px), .slider .slick-track (display: block)
+verticalSwiping: true, // Свайпить вверх-вниз
+```
+style.css
+```css
+.slider .slick-track{
+    display: block;
+}
+```
+style.css в .slider_item
+```css
+height: 225px;
+```
+
+31. в файле script.js можно настроить строк и столбцов в слайдере
+
+```js
+rows: 1, // Ряды - сколько изображений в высоту
+slidesPerRow: 1, // Сколько столбцов с изображениями
+```
+
+32. настраиваем слайдер для больших фотографий
+
+index.html
+```html
+<div class="sliderbig">
+    <div class="sliderbig_item">
+        <img src="img/slides/1.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img src="img/slides/2.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img src="img/slides/3.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img src="img/slides/4.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img src="img/slides/5.jpg" alt="">
+    </div>
+</div>
+```
+script.js
+```js
+$('.sliderbig').slick({
+    arrows:false, // Убираем в большом слайдере стрелки вправо-влево
+});
+```
+style.css убираем
+```css
+.slider .slick-track{ 
+    display: block;
+}
+
+/* centerMode из script.js */
+.slider_item {
+transition: all 0.3s ease 0s; 
+} /* Добавляем эффект перехода между слайдами */
+opacity: 0.4; /* Для всех слайдов убрать непрозрачность */
+text-align: center; /* Настраиваем по центру выбранное изображение в слайдере */
+height: 225px; /* Высота max слайда в вертикальном расположении в столбце */
+} 
+.slider_item.slick-center {
+    opacity: 1; /* Непрозрачность изображений вернуть для центрального слайда */
+}
+```
+style.css добавляем
+```css
+/* Большой слайдер */
+.sliderbig {}
+.sliderbig_item {
+    text-align: center;
+}
+```
+
+33. в файле script.js можно объединить большой и обычный слайдер. Делаем обмен классами
+
+```js
+// В обычном слайдере указываем большой слайдер
+asNavFor:".sliderbig", // Когда листаем обычный слайдер, меняется также большой слайдер
+
+// В большом слайдере указываем обычный слайдер
+asNavFor:".slider", // Когда листаем большой слайдер, меняется также обычный слайдер
+```
+
+34. в файле script.js адаптируем наш слайдер
+
+```js
+
 ```

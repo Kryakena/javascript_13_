@@ -1,7 +1,14 @@
-# Слайдер фотографий
+# 📷 Слайдер фотографий 📸
 
 Источник: видео "SLICK SLIDER - лучший слайдер для сайта за 1 час. Подробный гайд. Подключение и настройка слайдера" 
 https://vk.com/im/convo/19460369?entrypoint=list_all&z=video-125918837_456239145%2Fe27e4aca94946da8ff
+
+![2025-01-03_00-22-48](https://github.com/user-attachments/assets/3c1ecd16-e2c4-4795-8f75-3baca173116e)
+
+
+https://github.com/user-attachments/assets/5c0e008e-b36b-4882-bfc3-72d036ae7b2c
+
+
 
 1. создаем создаем файлы index.html, style.css (в папке css), script.js (в папке js) в папке проекта.
    Скачиваем готовые шаблоны изображений (в папку img) и файл js (положить в папку js) и вставляем в папку проекта:
@@ -674,6 +681,10 @@ $('.slider').slick('unslick');
 </html>
 ```
 
+![2025-01-03_00-12-02](https://github.com/user-attachments/assets/ce350b15-2161-4a58-ba86-7b8dfcbaf398)
+![2025-01-03_00-12-16](https://github.com/user-attachments/assets/e791355d-cfb9-4823-b15e-3d97d72d7605)
+
+
 2. файл style.css
 
 ```css
@@ -804,6 +815,11 @@ html,body{
 }
 ```
 
+![2025-01-03_00-11-03](https://github.com/user-attachments/assets/41a7040e-6471-4843-b3ab-d25a58e24c79)
+![2025-01-03_00-11-32](https://github.com/user-attachments/assets/ed4e606e-29f0-4c82-a25d-432af91e4106)
+![2025-01-03_00-11-46](https://github.com/user-attachments/assets/fa478da8-bfdf-434e-9384-6bfbf9f7118f)
+
+
 3. файл script.js
 
 ```js
@@ -883,3 +899,6 @@ $(document).ready(function () {
     $('.slider').slick('setPosition');
 });
 ```
+
+![2025-01-03_00-10-24](https://github.com/user-attachments/assets/416d1ecd-1c59-4801-9c92-3d3dfb25661b)
+![2025-01-03_00-10-40](https://github.com/user-attachments/assets/890d6706-4ced-432d-a8c6-80e793e3fe23)

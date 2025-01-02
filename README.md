@@ -366,25 +366,25 @@ rows: 1, // Ряды - сколько изображений в высоту
 slidesPerRow: 1, // Сколько столбцов с изображениями
 ```
 
-32. настраиваем слайдер для больших фотографий
+32. настраиваем слайдер для больших фотографий (те же изображения, но больших размеров в папке big)
 
 index.html
 ```html
 <div class="sliderbig">
     <div class="sliderbig_item">
-        <img src="img/slides/1.jpg" alt="">
+        <img src="img/slides/big/1.jpg" alt="">
     </div>
     <div class="sliderbig_item">
-        <img src="img/slides/2.jpg" alt="">
+        <img src="img/slides/big/2.jpg" alt="">
     </div>
     <div class="sliderbig_item">
-        <img src="img/slides/3.jpg" alt="">
+        <img src="img/slides/big/3.jpg" alt="">
     </div>
     <div class="sliderbig_item">
-        <img src="img/slides/4.jpg" alt="">
+        <img src="img/slides/big/4.jpg" alt="">
     </div>
     <div class="sliderbig_item">
-        <img src="img/slides/5.jpg" alt="">
+        <img src="img/slides/big/5.jpg" alt="">
     </div>
 </div>
 ```
@@ -434,5 +434,153 @@ asNavFor:".slider", // Когда листаем большой слайдер, 
 34. в файле script.js адаптируем наш слайдер
 
 ```js
+// Адаптивность слайдера
+responsive:[
+    {
+        breakpoint: 768, // При определенном количестве breakpoint (числовое значение ширины окна), меняется внешний вид слайдера
+        settings: {
+            slidesToShow: 2 // Было 3
+        }
+    },{
+        breakpoint: 480,
+        settings: {
+            slidesToShow: 1
+        }
+    }
+], 
+    mobileFirst: false,
+```
 
+35. в файле index.html ленивая загрузка - повышаем скорость загрузки. Загружается в браузер только та фотография, которая выбрана для просмотра
+
+```html
+<div class="sliderbig">
+    <div class="sliderbig_item">
+        <img data-lazy="img/slides/big/1.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img data-lazy="img/slides/big/2.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img data-lazy="img/slides/big/3.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img data-lazy="img/slides/big/4.jpg" alt="">
+    </div>
+    <div class="sliderbig_item">
+        <img data-lazy="img/slides/big/5.jpg" alt="">
+    </div>
+</div>
+```
+
+36. чтобы переместить стрелки в другой div без стилей, т.к. стили привязаны к другим div
+
+script.js в обычном слайдере
+```js
+appendArrows:$('.content'),
+```
+index.html добавляем новый div
+```html
+<div class="content"></div>
+```
+
+37. чтобы переместить точки в другой div без стилей, т.к. стили привязаны к другим div
+
+script.js в обычном слайдере
+```js
+appendDots:$('.content'),
+```
+
+38. в файле script.js создаем Событие на выбор (видим в панели разработчика - "Console"). 
+Это нужно, когда надо выйти за рамки одного слайда
+
+следующий слайд
+```js
+$('.slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+    console.log(nextSlide);
+});
+```
+предыдущий слайд
+```js
+$('.slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+    console.log(currentSlide);
+});
+```
+текущий слайд
+```js
+$('.slider').on('afterChange', function(event, slick, currentSlide) {
+    console.log(currentSlide);
+});
+```
+
+39. в файле script.js создаем Метод на выбор
+
+перезагрузить слайдер (встряхнет его при загрузке страницы)
+```js
+$('.slider').slick('setPosition');
+```
+позволяет пролистнуть до определенного слайда (если нужно управлять слайдером исходя из других событий - например ссылка - link)
+```js
+$('.link').click(function(event) {
+    $('.slider').slick('goTo',3); // Номер слайда, например 3
+})
+```
+позволяет пролистнуть до следующего слайда
+```js
+$('.slider').slick('slickPrev');
+```
+позволяет пролистнуть до предыдущего слайда
+```js
+$('.slider').slick('slickNext');
+```
+при клике на объект включается или останавливается прокрутка
+```js
+$('.slider').slick('slickPlay');
+$('.slider').slick('slickPause');
+```
+можем управлять содержимым слайдера в js и html
+```js
+$('.link_add').click(function (event) {
+    $('.slider').slick('slickAdd','<div class="newslide">123</div>');
+    return false;
+});
+```
+```html
+<a href="" class="link_add">Добавить</a>
+<a href="" class="link_add">Удалить</a>
+```
+слайд, который мы хотим удалить
+```js
+$('.link_add').click(function (event) {
+    $('.slider').slick('slickRemove',0); // Номер удаляемого слайда
+    return false;
+});
+```
+```html
+<a href="" class="link_add">Добавить</a>
+<a href="" class="link_add">Удалить</a>
+```
+фильтр в слайдере. При нажатии ссылки "Фильтровать", например оставить 3 и 4 слайд (добавляем к названию класса слово filter)
+```js
+    var filtered = false; // Проверяет переменная, сработал уже фильтр, или нет
+$('.link_filter').on('click', function (){
+    if (filtered === false) {
+        $('.slider').slick('slickFilter','.filter');
+        $(this).next('Убрать фильтр');
+        filtered = true;
+    } else {
+        $('.slider').slick('slickUnfilter');
+        $(this).text('Фильтровать');
+        filtered = false;
+    }
+    return false;
+});
+```
+```html
+<div class="slider_item filter">
+    <img src="img/slides/3.jpg" alt="">
+</div>
+<div class="slider_item filter">
+    <img src="img/slides/4.jpg" alt="">
+</div>
 ```

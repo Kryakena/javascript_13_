@@ -11,7 +11,7 @@ $(document).ready(function () {
         easing: 'ease', // Тип анимации пролистывания слайдов. По умолчанию 'linear'
         infinite: true, // Будет ли слайдер бесконечным. По умолчанию true
         initialSlide: 3, // С какого изображения начинать осмотр. По умолчанию - 0
-        autoplay:false, // Автоматически проигрывать слайды. По умолчанию false
+        autoplay:true, // Автоматически проигрывать слайды. По умолчанию false
         autoplaySpeed: 1500, // Период, через который пролистывается слайд. По умолчанию 3000, т.е. 3 секунды
 
         // Ставим на паузу проигрывание слайдера, когда наводим мышкой на слайд.
@@ -20,7 +20,7 @@ $(document).ready(function () {
         pauseOnDotsHover: true, // DotsHover - пауза при наведении на точки
 
         // Свайп (перетаскивание) изображений
-        draggable: false, // На компьютере отвечает за свайп. По умолчанию true
+        draggable: true, // На компьютере отвечает за свайп. По умолчанию true
         swipe: true, // На мобильном устройстве отвечает за свайп. По умолчанию true
 
         touchThreshold: 10, // Сколько изображений можно свайпить за 1 раз. По умолчанию 1
@@ -55,6 +55,9 @@ $(document).ready(function () {
             }
         ],
         mobileFirst: false,
+
+        // appendArrows:$('.content'), // Чтобы переместить стрелки в другой div без стилей, т.к. стили привязаны к другим div + в html создаем для него div
+        // appendDots:$('.content'), // Чтобы переместить точки в другой div
     });
     $('.sliderbig').slick({
         arrows:false, // Убираем в большом слайдере стрелки вправо-влево
@@ -63,4 +66,10 @@ $(document).ready(function () {
         // Объединяем большой и обычный слайдер
         asNavFor:".slider",
     });
+
+    $('.slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+       console.log(nextSlide);
+    });
+
+    $('.slider').slick('setPosition');
 });

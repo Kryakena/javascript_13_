@@ -103,4 +103,6 @@ html,body{
     border: 1px solid #fff;
 }
 
-.slider_item {}
+.slider_item {
+    text-align: center;
+}

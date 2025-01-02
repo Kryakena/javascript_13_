@@ -103,6 +103,12 @@ html,body{
     border: 1px solid #fff;
 }
 
+/* centerMode из script.js */
 .slider_item {
-    text-align: center;
+    transition: all 0.3s ease 0s; /* Добавляем эффект перехода между слайдами */
+    opacity: 0.4; /* Для всех слайдов убрать непрозрачность */
+    text-align: center; /* Настраиваем по центру выбранное изображение в слайдере */
+}
+.slider_item.slick-center {
+    opacity: 1; /* Непрозрачность изображений вернуть для центрального слайда */
 }
